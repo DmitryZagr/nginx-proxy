@@ -7,8 +7,32 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/log/access.log:/var/log/nginx/access.log
+      - ./nginx.tmpl:/app/nginx.tmpl
 
-  whoami:
-    image: jwilder/whoami
+  tomcat_0:
+    image: tomcat:8.5
+    container_name: tomcat8.5_0
     environment:
-      - VIRTUAL_HOST=whoami.local
+      - VIRTUAL_HOST=192.168.1.65
+    volumes:
+     - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+     - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+
+  tomcat_1:
+    image: tomcat:8.5
+    container_name: tomcat8.5_1
+    environment:
+      - VIRTUAL_HOST=192.168.1.65
+    volumes:
+     - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+     - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+
+  tomcat_2:
+    image: tomcat:8.5
+    container_name: tomcat8.5_2
+    environment:
+      - VIRTUAL_HOST=192.168.1.65
+    volumes:
+     - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+     - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
