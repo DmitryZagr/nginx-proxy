@@ -1,0 +1,20 @@
+init_config:      
+
+instances:          
+      -   nginx_status_url: http://192.168.1.65/nginx_status/
+          tags:
+            - instance:nginx-proxy
+          min_collection_interval: 5
+      -   nginx_status_url: http://192.168.1.65:8001/nginx_status/
+          tags:
+            - instance:nginx_0
+          min_collection_interval: 5
+      -   nginx_status_url: http://192.168.1.65:8002/nginx_status/
+          tags:
+            - instance:nginx_1
+          min_collection_interval: 5
+      -   nginx_status_url: http://192.168.1.65:8003/nginx_status/
+          tags:
+            - instance:nginx_2
+          min_collection_interval: 5
+

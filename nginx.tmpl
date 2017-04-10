@@ -252,6 +252,14 @@ server {
                 include /etc/nginx/vhost.d/default_location;
                 {{ end }}
 	}
+
+
+      location /nginx_status {
+          stub_status on;
+          access_log   off;
+          allow all;
+        }
+
 }
 
 {{ if (and (not $is_https) (exists "/etc/nginx/certs/default.crt") (exists "/etc/nginx/certs/default.key")) }}

@@ -1,0 +1,1564 @@
+SELECT forum.Reviewer.name, forum.Movie.title, forum.Rating.stars, forum.Rating.Date 
+FROM forum.Rating
+LEFT JOIN forum.Reviewer
+ON forum.Rating.rID = forum.Reviewer.rID
+LEFT JOIN forum.Movie
+ON forum.Rating.mID = forum.Rating.mID
+order by forum.Reviewer.name, forum.Movie.title, forum.Rating.stars;
+
+
+________________
+
+select * from forum.Rating JOIN forum.Reviewer  where (forum.Rating.rID = forum.Reviewer.rID) ; AWh-pW8-RVk-fgR
+
+osgi-master
+АйлБиБэк85
+
+_________________________________________________________AWh-pW8-RVk-fgR___________ 
+
+SELECT forum.Reviewer.name, forum.Movie.title, forum.Rating.stars, forum.Rating.Date 
+FROM forum.Rating, forum.Movie, forum.Reviewer
+WHERE forum.Rating.rID = forum.Reviewer.rID AND forum.Rating.mID = forum.Movie.mID
+order by forum.Reviewer.name, forum.Movie.title, forum.Rating.stars;
+____________________________________________________________________ENRGZEYK
+SELECT forum.Reviewer.name, forum.Movie.title, forum.Rating.stars, forum.Rating.Date 
+FROM forum.Rating, forum.Movie, forum.Reviewer
+WHERE forum.Rating.rID = forum.Reviewer.rID AND
+ forum.Rating.mID = forum.Movie.mID AND forum.Rating.stars IS NULL
+order by forum.Reviewer.name, forum.Movie.title, forum.Rating.stars;
+___________________________________________________________________
+
+
+SELECT Movie.title
+FROM Rating, Movie,  Reviewer
+WHERE
+ Rating.rID = Reviewer.rID AND
+ Rating.mID = Movie.mID AND
+ Reviewer.name != 'Chris Jackson'
+order by Movie.title;
+
+______
+
+
+SELECT Movie.title, MAX(Rating.stars)
+FROM Movie
+JOIN Rating ON Movie.mID = Rating.mID 
+  group by Movie.title
+order by Movie.title;
+___________________
+
+SELECT Movie.title ,  Rating.stars 
+FROM Rating,  Movie
+WHERE Rating.mID = Movie.mID
+order by Movie.title;
+_________
+
+SELECT Reviewer.name
+FROM Rating,  Reviewer
+WHERE Rating.rID = Reviewer.rID AND Rating.ratingDate IS NULL
+order by Reviewer.name;
+__________________________
+
+SELECT   Reviewer.name, Movie.title, Rating.stars
+FROM Rating, Movie,  Reviewer
+WHERE
+ Rating.rID = Reviewer.rID AND
+ Rating.mID = Movie.mID AND
+ Reviewer.name = Movie.director
+order by Reviewer.name, Movie.title, Rating.stars;
+_______________
+
+SELECT Reviewer.name
+FROM Rating,  Reviewer
+GROUP BY  Reviewer.name
+HAVING COUNT(Rating.stars) >= 3
+order by Reviewer.name;
+
+____________
+
+
+
+SELECT Movie.year
+FROM Rating,  Movie
+WHERE Rating.mID = Movie.mID AND (Rating.stars = 4 OR Rating.stars = 5)
+order by Movie.year;
+
+
+
+_________
+
+
+SELECT Movie.title, max(Rating.stars) - min(Rating.stars) AS DIFF
+FROM Movie 
+JOIN Rating ON Movie.mID = Rating.mID
+GROUP BY Movie.title
+ORDER BY DIFF , Movie.title;
+
+
+
+
+
+
+
+
+
+CREATE TABLE `User` (
+  `idUser` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `about` varchar(10000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(254) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `isAnonymous` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`idUser`,`email`),
+  UNIQUE KEY `id_UNIQUE` (`idUser`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+
+
+
+
+
+
+
+
+
+info: Testing started for: 127.0.0.1:9090
+
+info: Clear all
+
+info: Let there be users.
+
+info: Requesting http://127.0.0.1:9090/db/api/user/create/ with {'username': 'user1', 'about': 'hello im user1', 'isAnonymous': False, 'name': 'John', 'email': 'example@mail.ru'} (POST)
+
+info: Request time was: 0.0097 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example@mail.ru'} (GET)
+
+info: Request time was: 0.0110 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/user/create/ with {'username': None, 'about': None, 'isAnonymous': True, 'name': None, 'email': 'richard.nixon@example.com'} (POST)
+
+info: Request time was: 0.0093 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'richard.nixon@example.com'} (GET)
+
+info: Request time was: 0.0107 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/user/create/ with {'username': 'user2', 'about': 'hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2hello im user2', 'isAnonymous': False, 'name': 'Jey', 'email': 'example2@mail.ru'} (POST)
+
+info: Request time was: 0.0095 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example2@mail.ru'} (GET)
+
+info: Request time was: 0.0110 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/user/create/ with {'username': 'user3', 'about': 'hello im user3', 'isAnonymous': False, 'name': 'Josh', 'email': 'example3@mail.ru'} (POST)
+
+info: Request time was: 0.0093 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example3@mail.ru'} (GET)
+
+info: Request time was: 0.0112 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/user/create/ with {'username': 'user4', 'about': 'hello im user4', 'isAnonymous': False, 'name': 'Jim', 'email': 'example4@mail.ru'} (POST)
+
+info: Request time was: 0.0098 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example4@mail.ru'} (GET)
+
+info: Request time was: 0.0109 sec
+
+info: Let there be content
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/create/ with {'name': 'Forum With Sufficiently Large Name', 'short_name': 'forumwithsufficientlylargename', 'user': 'richard.nixon@example.com'} (POST)
+
+info: Request time was: 0.0136 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/details/ with {'related': ['user'], 'forum': 'forumwithsufficientlylargename'} (GET)
+
+info: Request time was: 0.0162 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/create/ with {'name': 'Forum I', 'short_name': 'forum1', 'user': 'example3@mail.ru'} (POST)
+
+info: Request time was: 0.0129 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/details/ with {'related': ['user'], 'forum': 'forum1'} (GET)
+
+info: Request time was: 0.0145 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/create/ with {'name': 'Forum II', 'short_name': 'forum2', 'user': 'example4@mail.ru'} (POST)
+
+info: Request time was: 0.0130 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/details/ with {'related': ['user'], 'forum': 'forum2'} (GET)
+
+info: Request time was: 0.0155 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/create/ with {'name': u'\u0424\u043e\u0440\u0443\u043c \u0422\u0440\u0438', 'short_name': 'forum3', 'user': 'example4@mail.ru'} (POST)
+
+info: Request time was: 0.0127 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/details/ with {'related': ['user'], 'forum': 'forum3'} (GET)
+
+info: Request time was: 0.0145 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/create/ with {'forum': 'forumwithsufficientlylargename', 'title': 'Thread With Sufficiently Large Title', 'isClosed': True, 'user': 'example3@mail.ru', 'date': '2014-01-01 00:00:01', 'message': 'hey hey hey hey!', 'slug': 'Threadwithsufficientlylargetitle', 'isDeleted': False} (POST)
+
+info: Request time was: 0.0099 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'related': ['forum', 'user'], 'thread': 657} (GET)
+
+info: Request time was: 0.0158 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': True, 'user': 'example3@mail.ru', 'date': '2016-01-22 00:34:36', 'message': 'my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0', 'isSpam': False, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0116 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5512, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0242 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5512, 'isApproved': True, 'user': 'richard.nixon@example.com', 'date': '2016-09-29 05:20:51', 'message': 'my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1', 'isSpam': False, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0123 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5513, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0239 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example3@mail.ru', 'date': '2016-10-28 04:09:17', 'message': 'my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2', 'isSpam': False, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0117 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5514, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0245 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5512, 'isApproved': True, 'user': 'example2@mail.ru', 'date': '2016-10-29 14:01:36', 'message': 'my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3', 'isSpam': False, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0122 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5515, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0245 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example2@mail.ru', 'date': '2016-10-30 03:50:53', 'message': 'my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4', 'isSpam': True, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0113 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5516, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0255 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': True, 'user': 'example@mail.ru', 'date': '2016-10-31 21:55:31', 'message': 'my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5', 'isSpam': True, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0115 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5517, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0249 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': True, 'user': 'example2@mail.ru', 'date': '2016-11-01 08:54:22', 'message': 'my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6', 'isSpam': True, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0116 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5518, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0247 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5516, 'isApproved': True, 'user': 'example4@mail.ru', 'date': '2016-11-01 20:54:42', 'message': 'my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7', 'isSpam': False, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0121 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5519, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0244 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': True, 'user': 'example2@mail.ru', 'date': '2016-11-02 00:51:19', 'message': 'my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8', 'isSpam': False, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0124 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5520, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0247 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5512, 'isApproved': False, 'user': 'example2@mail.ru', 'date': '2016-11-02 19:04:58', 'message': 'my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9', 'isSpam': True, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 657, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0121 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5521, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0250 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/create/ with {'forum': 'forum3', 'title': 'Thread I', 'isClosed': False, 'user': 'example@mail.ru', 'date': '2013-12-31 00:01:01', 'message': 'hey!', 'slug': 'thread1', 'isDeleted': False} (POST)
+
+info: Request time was: 0.0105 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'related': ['forum', 'user'], 'thread': 658} (GET)
+
+info: Request time was: 0.0197 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'richard.nixon@example.com', 'date': '2014-05-05 05:00:46', 'message': 'my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0', 'isSpam': False, 'isHighlighted': False, 'forum': 'forum3', 'thread': 658, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0114 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5522, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0256 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5522, 'isApproved': True, 'user': 'example2@mail.ru', 'date': '2014-06-26 01:38:10', 'message': 'my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1', 'isSpam': True, 'isHighlighted': True, 'forum': 'forum3', 'thread': 658, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0123 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5523, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0247 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': True, 'user': 'example@mail.ru', 'date': '2014-09-04 15:55:09', 'message': 'my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2', 'isSpam': True, 'isHighlighted': False, 'forum': 'forum3', 'thread': 658, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0115 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5524, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0245 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example3@mail.ru', 'date': '2016-08-17 02:26:49', 'message': 'my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3', 'isSpam': False, 'isHighlighted': False, 'forum': 'forum3', 'thread': 658, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0116 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5525, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0246 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'richard.nixon@example.com', 'date': '2016-08-26 14:06:18', 'message': 'my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4', 'isSpam': True, 'isHighlighted': True, 'forum': 'forum3', 'thread': 658, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0117 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5526, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0244 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5526, 'isApproved': True, 'user': 'example@mail.ru', 'date': '2016-09-03 11:40:15', 'message': 'my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5', 'isSpam': True, 'isHighlighted': True, 'forum': 'forum3', 'thread': 658, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0128 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5527, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0258 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5524, 'isApproved': True, 'user': 'example3@mail.ru', 'date': '2016-10-22 13:11:51', 'message': 'my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6', 'isSpam': True, 'isHighlighted': True, 'forum': 'forum3', 'thread': 658, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0124 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5528, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0251 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/create/ with {'forum': 'forumwithsufficientlylargename', 'title': 'Thread II', 'isClosed': False, 'user': 'example2@mail.ru', 'date': '2013-12-30 00:01:01', 'message': 'hey hey!', 'slug': 'thread2', 'isDeleted': False} (POST)
+
+info: Request time was: 0.0102 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'related': ['forum', 'user'], 'thread': 659} (GET)
+
+info: Request time was: 0.0177 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example@mail.ru', 'date': '2014-05-23 07:11:15', 'message': 'my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0', 'isSpam': True, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 659, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0117 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5529, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0248 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example@mail.ru', 'date': '2015-07-28 20:07:58', 'message': 'my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1', 'isSpam': False, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 659, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0117 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5530, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0253 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': True, 'user': 'example@mail.ru', 'date': '2015-11-04 18:43:09', 'message': 'my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2', 'isSpam': True, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 659, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0126 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5531, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0262 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example@mail.ru', 'date': '2016-02-15 02:40:36', 'message': 'my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3', 'isSpam': True, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 659, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0118 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5532, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0256 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5532, 'isApproved': True, 'user': 'richard.nixon@example.com', 'date': '2016-09-19 03:28:11', 'message': 'my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4', 'isSpam': False, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 659, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0126 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5533, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0257 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example3@mail.ru', 'date': '2016-09-20 17:22:56', 'message': 'my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5', 'isSpam': True, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 659, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0131 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5534, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0252 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5529, 'isApproved': False, 'user': 'example2@mail.ru', 'date': '2016-10-09 02:22:27', 'message': 'my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6', 'isSpam': True, 'isHighlighted': False, 'forum': 'forumwithsufficientlylargename', 'thread': 659, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0145 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5535, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0257 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5532, 'isApproved': False, 'user': 'richard.nixon@example.com', 'date': '2016-10-25 05:15:52', 'message': 'my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7', 'isSpam': True, 'isHighlighted': True, 'forum': 'forumwithsufficientlylargename', 'thread': 659, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0127 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5536, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0268 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/create/ with {'forum': 'forum2', 'title': u'\u0422\u0440\u0435\u0434 \u0422\u0440\u0438', 'isClosed': False, 'user': 'richard.nixon@example.com', 'date': '2013-12-29 00:01:01', 'message': 'hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! hey hey hey! ', 'slug': 'thread3', 'isDeleted': False} (POST)
+
+info: Request time was: 0.0111 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'related': ['forum', 'user'], 'thread': 660} (GET)
+
+info: Request time was: 0.0174 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example3@mail.ru', 'date': '2016-08-22 15:04:14', 'message': 'my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0my message 0', 'isSpam': False, 'isHighlighted': False, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0141 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5537, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0265 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5537, 'isApproved': True, 'user': 'example4@mail.ru', 'date': '2016-10-08 07:54:57', 'message': 'my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1my message 1', 'isSpam': True, 'isHighlighted': True, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0139 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5538, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0295 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5537, 'isApproved': False, 'user': 'example2@mail.ru', 'date': '2016-10-29 10:08:24', 'message': 'my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2', 'isSpam': True, 'isHighlighted': True, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0134 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5539, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0269 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': True, 'user': 'example3@mail.ru', 'date': '2016-11-01 01:59:23', 'message': 'my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3my message 3', 'isSpam': False, 'isHighlighted': True, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0132 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5540, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0275 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': True, 'user': 'example2@mail.ru', 'date': '2016-11-02 17:50:00', 'message': 'my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4my message 4', 'isSpam': True, 'isHighlighted': False, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0119 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5541, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0260 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5538, 'isApproved': True, 'user': 'example4@mail.ru', 'date': '2016-11-03 01:58:23', 'message': 'my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5my message 5', 'isSpam': False, 'isHighlighted': True, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0131 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5542, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0268 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5539, 'isApproved': False, 'user': 'example4@mail.ru', 'date': '2016-11-03 01:59:00', 'message': 'my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6my message 6', 'isSpam': True, 'isHighlighted': True, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0149 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5543, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0265 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5538, 'isApproved': False, 'user': 'example2@mail.ru', 'date': '2016-11-03 01:59:03', 'message': 'my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7my message 7', 'isSpam': True, 'isHighlighted': True, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0134 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5544, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0268 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': None, 'isApproved': False, 'user': 'example4@mail.ru', 'date': '2016-11-03 01:59:04', 'message': 'my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8my message 8', 'isSpam': True, 'isHighlighted': False, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': True} (POST)
+
+info: Request time was: 0.0123 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5545, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0263 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/create/ with {'parent': 5542, 'isApproved': False, 'user': 'example3@mail.ru', 'date': '2016-11-03 01:59:04', 'message': 'my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9my message 9', 'isSpam': True, 'isHighlighted': False, 'forum': 'forum2', 'thread': 660, 'isDeleted': False, 'isEdited': False} (POST)
+
+info: Request time was: 0.0135 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5546, 'related': ['thread', 'forum', 'user']} (GET)
+
+info: Request time was: 0.0275 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': -42} (GET)
+
+info: Request time was: 0.0079 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/user/create/ with {'username': 'user4', 'about': 'hello im user4', 'isAnonymous': False, 'name': 'Jim', 'email': 'example4@mail.ru'} (POST)
+
+info: Request time was: 0.0100 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'related': ['user', 'thread'], 'thread': 660} (GET)
+
+info: Request time was: 0.0072 sec
+
+info: List posts
+
+info: Requesting http://127.0.0.1:9090/db/api/post/list/ with {'since': '2014-01-02 00:00:00', 'limit': 2, 'order': 'asc', 'forum': 'forumwithsufficientlylargename'} (GET)
+
+info: Request time was: 0.0095 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/post/list/ with {'since': '2014-01-01 00:00:00', 'order': 'desc', 'forum': 'forum1'} (GET)
+
+info: Request time was: 0.0092 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/post/list/ with {'since': '2014-01-01 00:00:00', 'order': 'desc', 'thread': 659} (GET)
+
+info: Request time was: 0.0092 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/post/list/ with {'since': '2014-01-03 00:00:00', 'limit': 3, 'order': 'desc', 'thread': 660} (GET)
+
+info: Request time was: 0.0087 sec
+
+info: Validating by requesting list of objects
+
+info: Remove post
+
+info: Requesting http://127.0.0.1:9090/db/api/post/remove/ with {'post': 5524} (POST)
+
+info: Request time was: 0.0095 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5524} (GET)
+
+info: Request time was: 0.0089 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 658} (GET)
+
+info: Request time was: 0.0108 sec
+
+info: Restore post
+
+info: Requesting http://127.0.0.1:9090/db/api/post/restore/ with {'post': 5524} (POST)
+
+info: Request time was: 0.0096 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5524} (GET)
+
+info: Request time was: 0.0079 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 658} (GET)
+
+info: Request time was: 0.0080 sec
+
+info: Update post
+
+info: Requesting http://127.0.0.1:9090/db/api/post/update/ with {'post': 5524, 'message': 'my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2my message 2'} (POST)
+
+info: Request time was: 0.0116 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5524} (GET)
+
+info: Request time was: 0.0099 sec
+
+info: Likes time!!!
+
+info: Requesting http://127.0.0.1:9090/db/api/post/vote/ with {'vote': 1, 'post': 5531} (POST)
+
+info: Request time was: 0.0116 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/post/details/ with {'post': 5531} (GET)
+
+info: Request time was: 0.0089 sec
+
+info: List some threads
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/list/ with {'since': '2014-01-02 00:00:00', 'limit': 2, 'order': 'asc', 'forum': 'forumwithsufficientlylargename'} (GET)
+
+info: Request time was: 0.0092 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/list/ with {'since': '2014-01-01 00:00:00', 'order': 'desc', 'forum': 'forum1'} (GET)
+
+info: Request time was: 0.0088 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/list/ with {'since': '2014-01-01 00:00:00', 'user': 'example2@mail.ru', 'order': 'desc'} (GET)
+
+info: Request time was: 0.0091 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/list/ with {'since': '2014-01-03 00:00:00', 'limit': 3, 'user': 'example3@mail.ru', 'order': 'desc'} (GET)
+
+info: Request time was: 0.0092 sec
+
+info: Validating by requesting list of objects
+
+info: And list posts in them
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/listPosts/ with {'since': '2014-01-02 00:00:00', 'limit': 2, 'order': 'asc', 'thread': 659} (GET)
+
+info: Request time was: 0.0093 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/listPosts/ with {'sort': 'tree', 'since': '2014-01-01 00:00:00', 'limit': 3, 'order': 'desc', 'thread': 658} (GET)
+
+info: Request time was: 0.0136 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/listPosts/ with {'sort': 'parent_tree', 'since': '2014-01-01 00:00:00', 'limit': 2, 'order': 'asc', 'thread': 657} (GET)
+
+info: Request time was: 0.0200 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/listPosts/ with {'since': '2014-01-03 00:00:00', 'limit': 3, 'order': 'desc', 'thread': 658} (GET)
+
+info: Request time was: 0.0082 sec
+
+info: Validating by requesting list of objects
+
+info: Go away thread!
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/remove/ with {'thread': 657} (POST)
+
+info: Request time was: 0.0109 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 657} (GET)
+
+info: Request time was: 0.0083 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/listPosts/ with {'order': 'desc', 'thread': 657} (GET)
+
+info: Request time was: 0.0091 sec
+
+info: Validating by requesting list of objects
+
+info: Alright, I forgive you, come back
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/restore/ with {'thread': 657} (POST)
+
+info: Request time was: 0.0097 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 657} (GET)
+
+info: Request time was: 0.0077 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/listPosts/ with {'order': 'desc', 'thread': 657} (GET)
+
+info: Request time was: 0.0088 sec
+
+info: Validating by requesting list of objects
+
+info: Changed my mind again, goodbye!
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/close/ with {'thread': 657} (POST)
+
+info: Request time was: 0.0086 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 657} (GET)
+
+info: Request time was: 0.0081 sec
+
+info: But I cant live without you
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/open/ with {'thread': 657} (POST)
+
+info: Request time was: 0.0087 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 657} (GET)
+
+info: Request time was: 0.0081 sec
+
+info: Update post
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/update/ with {'message': 'hey hey hey hey!', 'slug': 'newslug', 'thread': 657} (POST)
+
+info: Request time was: 0.0097 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 657} (GET)
+
+info: Request time was: 0.0082 sec
+
+info: Likes time...again!
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/vote/ with {'vote': 1, 'thread': 657} (POST)
+
+info: Request time was: 0.0106 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 657} (GET)
+
+info: Request time was: 0.0089 sec
+
+info: Subscribe me
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/subscribe/ with {'user': 'example3@mail.ru', 'thread': 657} (POST)
+
+info: Request time was: 0.0124 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 657} (GET)
+
+info: Request time was: 0.0104 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/subscribe/ with {'user': 'example3@mail.ru', 'thread': 658} (POST)
+
+info: Request time was: 0.0095 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 658} (GET)
+
+info: Request time was: 0.0081 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/subscribe/ with {'user': 'example@mail.ru', 'thread': 657} (POST)
+
+info: Request time was: 0.0116 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 657} (GET)
+
+info: Request time was: 0.0089 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/subscribe/ with {'user': 'example@mail.ru', 'thread': 658} (POST)
+
+info: Request time was: 0.0098 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 658} (GET)
+
+info: Request time was: 0.0080 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/subscribe/ with {'user': 'example2@mail.ru', 'thread': 658} (POST)
+
+info: Request time was: 0.0096 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 658} (GET)
+
+info: Request time was: 0.0089 sec
+
+info: Unsubscribe me
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/unsubscribe/ with {'user': 'example2@mail.ru', 'thread': 660} (POST)
+
+info: Request time was: 0.0087 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/thread/details/ with {'thread': 660} (GET)
+
+info: Request time was: 0.0082 sec
+
+info: OMG, I was soooooo wasted...what did I wrote yesterday?
+
+info: Requesting http://127.0.0.1:9090/db/api/user/listPosts/ with {'since': '2014-01-02 00:00:00', 'limit': 2, 'user': 'example@mail.ru', 'order': 'asc'} (GET)
+
+info: Request time was: 0.0096 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/user/listPosts/ with {'since': '2014-01-01 00:00:00', 'user': 'richard.nixon@example.com', 'order': 'desc'} (GET)
+
+info: Request time was: 0.0094 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/user/listPosts/ with {'since': '2014-01-01 00:00:00', 'user': 'example2@mail.ru', 'order': 'asc'} (GET)
+
+info: Request time was: 0.0103 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/user/listPosts/ with {'since': '2014-01-03 00:00:00', 'limit': 3, 'user': 'example3@mail.ru', 'order': 'desc'} (GET)
+
+info: Request time was: 0.0098 sec
+
+info: Validating by requesting list of objects
+
+info: It was huge mistake. Need to change a nick quickly
+
+info: Requesting http://127.0.0.1:9090/db/api/user/updateProfile/ with {'about': 'Wowowowow', 'user': 'example2@mail.ru', 'name': 'NewName'} (POST)
+
+info: Request time was: 0.0182 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example2@mail.ru'} (GET)
+
+info: Request time was: 0.0120 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/user/updateProfile/ with {'about': 'Wowowowow!!!', 'user': 'example3@mail.ru', 'name': 'NewName2'} (POST)
+
+info: Request time was: 0.0182 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example3@mail.ru'} (GET)
+
+info: Request time was: 0.0118 sec
+
+info: Follow someone
+
+info: Requesting http://127.0.0.1:9090/db/api/user/follow/ with {'follower': 'example3@mail.ru', 'followee': 'example@mail.ru'} (POST)
+
+info: Request time was: 0.0195 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example3@mail.ru'} (GET)
+
+info: Request time was: 0.0123 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example@mail.ru'} (GET)
+
+info: Request time was: 0.0120 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/user/follow/ with {'follower': 'example@mail.ru', 'followee': 'example3@mail.ru'} (POST)
+
+info: Request time was: 0.0191 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example@mail.ru'} (GET)
+
+info: Request time was: 0.0124 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example3@mail.ru'} (GET)
+
+info: Request time was: 0.3481 sec
+
+info: List followers
+
+info: Requesting http://127.0.0.1:9090/db/api/user/listFollowers/ with {'limit': 3, 'user': 'example3@mail.ru', 'since_id': 0, 'order': 'desc'} (GET)
+
+info: Request time was: 0.0082 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/user/listFollowers/ with {'user': 'example@mail.ru', 'order': 'asc'} (GET)
+
+info: Request time was: 0.0084 sec
+
+info: Validating by requesting list of objects
+
+info: List following
+
+info: Requesting http://127.0.0.1:9090/db/api/user/listFollowing/ with {'limit': 3, 'user': 'example3@mail.ru', 'since_id': 1, 'order': 'desc'} (GET)
+
+info: Request time was: 0.0077 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/user/listFollowing/ with {'user': 'example@mail.ru', 'order': 'asc'} (GET)
+
+info: Request time was: 0.0082 sec
+
+info: Validating by requesting list of objects
+
+info: Unfollow someone
+
+info: Requesting http://127.0.0.1:9090/db/api/user/unfollow/ with {'follower': 'example3@mail.ru', 'followee': 'example@mail.ru'} (POST)
+
+info: Request time was: 0.0078 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example3@mail.ru'} (GET)
+
+info: Request time was: 0.0070 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example@mail.ru'} (GET)
+
+info: Request time was: 0.0070 sec
+
+info: Requesting http://127.0.0.1:9090/db/api/user/unfollow/ with {'follower': 'example@mail.ru', 'followee': 'example3@mail.ru'} (POST)
+
+info: Request time was: 0.0106 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example@mail.ru'} (GET)
+
+info: Request time was: 0.0064 sec
+
+info: Validating by requesting object details
+
+info: Requesting http://127.0.0.1:9090/db/api/user/details/ with {'user': 'example3@mail.ru'} (GET)
+
+info: Request time was: 0.0063 sec
+
+info: List forum posts
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listPosts/ with {'related': ['thread'], 'since': '2014-01-02 00:00:00', 'limit': 2, 'order': 'asc', 'forum': 'forumwithsufficientlylargename'} (GET)
+
+info: Request time was: 0.0068 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listPosts/ with {'related': ['thread', 'forum'], 'since': '2014-01-01 00:00:00', 'order': 'desc', 'forum': 'forum1'} (GET)
+
+info: Request time was: 0.0054 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listPosts/ with {'since': '2014-01-01 00:00:00', 'order': 'desc', 'forum': 'forum2'} (GET)
+
+info: Request time was: 0.0058 sec
+
+info: Validating by requesting list of objects
+
+error: len(api objects list) != len(test object list): 9 != 10
+
+info: List forum threads
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listThreads/ with {'related': ['forum', 'user'], 'since': '2013-12-30 00:00:00', 'limit': 2, 'order': 'asc', 'forum': 'forumwithsufficientlylargename'} (GET)
+
+info: Request time was: 0.0130 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listThreads/ with {'related': ['forum'], 'since': '2013-12-31 00:00:00', 'order': 'desc', 'forum': 'forum1'} (GET)
+
+info: Request time was: 0.0046 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listThreads/ with {'related': ['user'], 'since': '2014-01-01 00:00:00', 'order': 'desc', 'forum': 'forum2'} (GET)
+
+info: Request time was: 0.0049 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listThreads/ with {'since': '2013-12-29 00:00:00', 'limit': 3, 'order': 'desc', 'forum': 'forum3'} (GET)
+
+info: Request time was: 0.0058 sec
+
+info: Validating by requesting list of objects
+
+info: List forum users
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listUsers/ with {'limit': 2, 'since_id': 2, 'forum': 'forumwithsufficientlylargename', 'order': 'asc'} (GET)
+
+info: Request time was: 0.0100 sec
+
+info: Validating by requesting list of objects
+
+info: Requesting http://127.0.0.1:9090/db/api/forum/listUsers/ with {'order': 'desc', 'forum': 'forum1'} (GET)
+
+info: Request time was: 0.0049 sec
+
+info: Validating by requesting list of objects
+
+{'clear': True,
+ 'errors': True,
+ 'forum/create': True,
+ 'forum/listPosts': False,
+ 'forum/listThreads': True,
+ 'forum/listUsers': True,
+ 'post/create': True,
+ 'post/list': True,
+ 'post/remove': True,
+ 'post/restore': True,
+ 'post/update': True,
+ 'post/vote': True,
+ 'thread/close': True,
+ 'thread/create': True,
+ 'thread/list': True,
+ 'thread/listPosts': True,
+ 'thread/open': True,
+ 'thread/remove': True,
+ 'thread/restore': True,
+ 'thread/subscribe': True,
+ 'thread/unsubscribe': True,
+ 'thread/update': True,
+ 'thread/vote': True,
+ 'user/create': True,
+ 'user/follow': True,
+ 'user/listFollowers': True,
+ 'user/listFollowing': True,
+ 'user/listPosts': True,
+ 'user/unfollow': True,
+ 'user/updateProfile': True}
+29/30 tests passed
+admin@MacBook-Pro-Dmitrij:~/Work/MailRu/2_semester/db/technopark-db-api/tests$ 
+___________________
+domains
+ int, O, D, H, T, NUM = integer
+ 
+
+predicates
+ is_negative(int)
+ is_not_null(int)
+ is_null(int)
+ is_incorrect(int)
+ is_last_digit(int)
+ is_not_last_digit(int)
+ 
+ nondeterm analyze(int)
+ nondeterm analyze_d(int)
+ nondeterm analyze_h(int)
+ nondeterm analyze_t(int)
+ 
+clauses
+ is_negative(INT):- INT < 0.
+ is_not_null(INT):- INT <> 0.
+ is_null(INT):- INT = 0.
+ is_incorrect(INT):- INT > 9999.
+ is_last_digit(INT):- INT <= 9, INT >= 0.
+ is_not_last_digit(INT):- INT >= 10.
+ 
+ analyze(INT):-is_negative(INT), write("Ошибка:Введено отрицательное число"), nl, !.
+ analyze(INT):-is_null(INT), write("Введен ноль"), nl, !.
+ analyze(INT):-is_incorrect(INT), write("Ошибка: введено число с большим количеством разрядов, "),
+ 										write("чем 4"), nl, !.						
+ analyze(INT):-    O = INT mod 10, is_not_null(0), write("Единицы = "), write(O), nl, is_not_last_digit(INT), !.
+ analyze(INT):-    is_not_last_digit(INT), analyze_d(INT).
+ 
+ analyze_d(INT):-  D = (INT div 10) mod 10, write("Десятки = "), write(D), nl, NUM = INT div 10, is_not_last_digit(NUM), !.
+ analyze_d(INT):-  analyze_h(INT).
+ 
+ analyze_h(INT):-  H = (INT div 100) mod 10, write("Сотни = "), write(H), nl, NUM = INT div 100, is_not_last_digit(NUM), !.
+ analyze_h(INT):-  analyze_t(INT).
+ 
+ analyze_t(INT):-  T = (INT div 1000), write("Тысячи = "), write(T),  nl.
+ 
+goal
+ write("Enter integer: "), readint(X), write(X), nl, analyze(X).
+____________
+database  right(string, char)   wrong(string, char) predicates  nondeterm data(string, char)          process(string, char)% (Quest, Ans)  updatebase(string, char, char) % (Quest, Ans, Key)  nondeterm right_list(integer)  nondeterm wrong_list(integer)  nondeterm summarizeclauses  data("Пол мужской?: ", 'y').  data("Возраст 20?: ", 'y').  data("Учится в МГУ? ", 'n').  data("Есть брат?: ", 'n').  data("Живет в Москве?: ", 'n').  data("УчитсЯ на 4 курсе?: ", 'y').  data("Фамилия Шевцов?: ", 'y').  data("Отчество Алексеевич?: ", 'n').    process(Quest,Ans):-write(Quest),readchar(Key),write(Key),updatebase(Quest,Ans,Key),nl.  updatebase(Quest,Ans,Key):- Ans=Key,assertz(right(Quest, Key)),!.  updatebase(Quest,Ans,Key):-assertz(wrong(Quest, Key)).  right_list(RightNumber):- right(Quest,Key),retract(right(Quest,Key)),write(Quest),write(Key),nl,right_list(N),RightNumber=N+1;RightNumber=0.  wrong_list(WrongNumber):- wrong(Quest,Key),retract(wrong(Quest,Key)),write(Quest),write(Key),nl,wrong_list(N),WrongNumber=N+1;WrongNumber=0.    summarize :-     nl, write("Верно отвеченные вопросы:"), nl,    right_list(RightNumber),     nl, write("Неверно отвеченные вопросы:"), nl,    wrong_list(WrongNumber),     Accuracy = RightNumber / (RightNumber + WrongNumber) * 100,     writef("Òî÷íîñòü îòâåòîâ = %3.0f%%", Accuracy), nl.  goal  write("Вы интересуетесь сведениЯми о студенте Шевцове Юрие кафедры ИУ-3 Информационные системы и телекоммуникации группы ИУ3-71"),nl,  write("Отвечайте на вопросы y/n"),nl, fail;   data(Quest, Ans), process(Quest, Ans), fail;  summarize.
+________________________________________________________________
+
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.NumberFormatException: For input string: ""
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:982) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:707) ~[javax.servlet-api-3.1.0.jar!/:3.1.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790) ~[javax.servlet-api-3.1.0.jar!/:3.1.0]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:845) ~[jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1689) ~[jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter.doFilter(WebSocketUpgradeFilter.java:225) ~[websocket-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1676) ~[jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1676) ~[jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:89) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1676) ~[jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1676) ~[jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1676) ~[jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:581) [jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:548) [jetty-security-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:226) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1180) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:511) [jetty-servlet-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1112) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:134) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.Server.handle(Server.java:524) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:319) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:253) [jetty-server-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:273) [jetty-io-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:95) [jetty-io-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.io.SelectChannelEndPoint$2.run(SelectChannelEndPoint.java:93) [jetty-io-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.util.thread.strategy.ExecuteProduceConsume.executeProduceConsume(ExecuteProduceConsume.java:303) [jetty-util-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.util.thread.strategy.ExecuteProduceConsume.produceConsume(ExecuteProduceConsume.java:148) [jetty-util-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.util.thread.strategy.ExecuteProduceConsume.run(ExecuteProduceConsume.java:136) [jetty-util-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671) [jetty-util-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589) [jetty-util-9.3.11.v20160721.jar!/:9.3.11.v20160721]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_111]
+Caused by: java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65) ~[na:1.8.0_111]
+	at java.lang.Integer.parseInt(Integer.java:592) ~[na:1.8.0_111]
+	at java.lang.Integer.parseInt(Integer.java:615) ~[na:1.8.0_111]
+	at ru.mail.park.service.implementation.PostServiceImpl.create(PostServiceImpl.java:93) ~[classes!/:1.0-SNAPSHOT]
+	at ru.mail.park.service.implementation.PostServiceImpl$$FastClassBySpringCGLIB$$c9490eca.invoke(<generated>) ~[classes!/:1.0-SNAPSHOT]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) ~[spring-core-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:720) ~[spring-aop-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157) ~[spring-aop-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99) ~[spring-tx-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281) ~[spring-tx-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) ~[spring-tx-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:655) ~[spring-aop-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at ru.mail.park.service.implementation.PostServiceImpl$$EnhancerBySpringCGLIB$$18ac6810.create(<generated>) ~[classes!/:1.0-SNAPSHOT]
+	at ru.mail.park.controllers.PostController.createPost(PostController.java:37) ~[classes!/:1.0-SNAPSHOT]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136) ~[spring-web-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970) ~[spring-webmvc-4.3.3.RELEASE.jar!/:4.3.3.RELEASE]
+	... 42 common frames omitted
+
+_____________________________________________________________________________________
+
+
+commit 7fd7f4b483ed4f1e0750d1aea3d80b6387f62a63
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Mon Jan 16 23:32:19 2017 +0300
+
+    add queryParam support
+
+commit c8eee1eacb538bb91b7d4e8927544a36f53ad50e
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Mon Jan 16 20:06:17 2017 +0300
+
+    add service.alias property
+
+commit 3f61abacd3b09b7fa93d312a768743e965bb7692
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Mon Jan 16 17:55:27 2017 +0300
+
+    add service-support path, add nameConvention to parameters
+
+commit 7b44ce7efcd75dff03145bdc09febd3b2215ab09
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Sat Jan 14 16:47:06 2017 +0300
+
+    add HttpHeadersSupport
+
+commit 5882d44181331d9dffa5e5afd5d498f51c2ee278
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Sat Jan 14 15:18:50 2017 +0300
+
+    add Entity support
+
+commit 16425175b3c897bd26ea72783785c7ab33e3057d
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Sat Jan 14 14:10:11 2017 +0300
+
+    add multy support for PathParams
+
+commit f4b02a3d2bc76e956920f85ba88d1e2c11624be2
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Fri Jan 13 21:15:29 2017 +0300
+
+    refactor JerseyDistributionProvider
+
+commit dd84bee61c72cc4d213018f88b4941fd18474541
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Fri Jan 13 16:14:24 2017 +0300
+
+    refactor prodfile
+
+commit a2d0df74526b3c1b4890bd175333b1d7cc24eb3c
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Fri Jan 13 15:49:03 2017 +0300
+
+    Add working configuration to product file
+
+commit eca8b61fe49c211fbb132c9434391ae75e1069bb
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Thu Jan 12 18:46:44 2017 +0300
+
+    add product file
+
+commit e8df45d009bd5320489247ee0e07ac0cceaca438
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Mon Jan 2 03:20:54 2017 +0300
+
+    add launch config
+
+commit 253da18c9648ff01b9f086f94dc52db5313bae3a
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Mon Jan 2 03:10:05 2017 +0300
+
+    fixed build properties
+
+commit 12bb42ca04b6c02de7f86cb6449f032f022de65b
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Mon Jan 2 03:09:45 2017 +0300
+
+    fixed build properties
+
+commit f70c2407f4173335d8fda21a8935752d89e884bc
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Mon Jan 2 02:20:41 2017 +0300
+
+    Compile Problems Resolved
+
+commit e991d050c493805eac20531bc8450dd0e54edff6
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Mon Jan 2 02:19:56 2017 +0300
+
+    Compile Problems resolved
+
+commit 55e0a96bd22e75c64d8a423e3e598e9feff57d36
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Thu Dec 29 18:59:06 2016 +0300
+
+    Refactor Oomph setup file
+
+commit d2a2c8defc8e37f5da7a002ed3a894b6b8cb3f23
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Wed Apr 13 21:22:25 2016 +0300
+
+    Manifest refactoring
+
+commit fbcf6e5e509159ec081ecb7f452d563cda6fab70
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Mon Apr 11 12:16:30 2016 +0300
+
+    Parent pom refactoring
+
+commit c416d7c1f5b29013b6a5e7ec0fbf4bf51692471f
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Mon Apr 11 12:08:19 2016 +0300
+
+    Initial version
+
+commit e6541ff0ca7f25e728864831e55f85ad4a533903
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Sat Apr 9 12:06:10 2016 +0300
+
+    Initial folder structure
+
+commit 936fcdb9b86fbdd60d2bc329d9c105580b7f614a
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Mon Apr 11 12:00:58 2016 +0300
+
+    Initial commit
+____________________________________________________________________________________
+
+
+commit ad5e9de1e69f255be99c01a8d7fd9c205c914123
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Tue Jan 17 21:41:31 2017 +0300
+
+    fixed org.apache.httpcomponents.httpclien version to 4.3.6
+
+commit 68557dd4f30ac271f3b31550a8ea65afadc56d31
+Author: DmitryZagr <zagd@1c.ru>
+Date:   Tue Jan 17 21:33:53 2017 +0300
+
+    remove all JaxRs annotations
+
+commit 11481886960bd1c4258f7ca8c73f8ab5450f329d
+Author: Zagrebaev_D <Zagrebaev_D@Zagrebaev-D.dept07>
+Date:   Fri Dec 2 20:00:41 2016 +0300
+
+    add product file
+
+commit b1a501ed85f096bd3f59ecbc2b884e071e358b27
+Author: Zagrebaev_D <Zagrebaev_D@Zagrebaev-D.dept07>
+Date:   Fri Dec 2 20:00:06 2016 +0300
+
+    Add product file
+
+commit 2e9fb3cd90782eda9e8e62eb849632844233486d
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Tue Nov 29 18:04:16 2016 +0300
+
+    Remove target file, update hamcrest and swt dependencies
+
+commit 3ec4b44b190c1b24e27b1846a13a54e00d0829fb
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Wed Nov 23 18:13:03 2016 +0300
+
+    New hierarchical Oomph projects structure
+
+commit 2d143c4263d40bf469cb3ed844e2d42c34e03391
+Author: Dmitry Zagrebaev <zagd@1c.ru>
+Date:   Sun Nov 20 12:03:01 2016 +0300
+
+    Чистка кода
+
+commit 3ebcbc0b68f5341f81d202dc375aa085e1655cda
+Author: Dmitry Zagrebaev <zagd@1c.ru>
+Date:   Sat Nov 19 15:03:36 2016 +0300
+
+    Поправлены баги с путями
+
+commit 4428bd582d35139a1fa5c6414b4dc06bf55f3b0e
+Author: Dmitry Zagrebaev <zagd@1c.ru>
+Date:   Fri Nov 18 22:21:59 2016 +0300
+
+    Баг с путем
+
+commit 24d7fc9b6c6b9ff4091bccd356e559f2f5d06d64
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Fri Nov 18 20:37:16 2016 +0300
+
+    Unknown update sites: fixed
+
+commit 9989bb46a09e545db1a3863c0064e8ead1e60647
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Fri Nov 18 19:52:28 2016 +0300
+
+    Unknown update sites: fixed
+
+commit 5cd217e1cbde2f99369d5b4bce29422bb394430f
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Wed Nov 16 23:08:30 2016 +0300
+
+    Refactor more readable USS name
+
+commit 722628d22a9c79bb64291a5ec6baa784c5959b60
+Author: Alex Ivanov <amivanoff@gmail.com>
+Date:   Wed Nov 16 23:05:53 2016 +0300
+
+    Mode to agentlab catalog
+
+______________________________________________
+
+
+An error was detected while performing the engine operation and the changes are being rolled back. See the log for details.
+ERROR: org.eclipse.equinox.p2.engine code=4 An error occurred during the org.eclipse.equinox.internal.p2.engine.phases.CheckTrust phase.
+  at org.eclipse.oomph.util.OomphPlugin.coreException(OomphPlugin.java:280)
+  at org.eclipse.oomph.p2.internal.core.ProfileTransactionImpl$3.commit(ProfileTransactionImpl.java:547)
+  at org.eclipse.oomph.p2.internal.core.ProfileTransactionImpl.commit(ProfileTransactionImpl.java:340)
+  at org.eclipse.oomph.setup.p2.impl.P2TaskImpl.perform(P2TaskImpl.java:729)
+  at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.doPerformNeededSetupTasks(SetupTaskPerformer.java:3305)
+  at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.performNeededSetupTasks(SetupTaskPerformer.java:3233)
+  at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.performTriggeredSetupTasks(SetupTaskPerformer.java:3214)
+  at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.perform(SetupTaskPerformer.java:3114)
+  at org.eclipse.oomph.setup.ui.wizards.ProgressPage$9.run(ProgressPage.java:556)
+  at org.eclipse.oomph.setup.ui.wizards.ProgressPage$11$1.run(ProgressPage.java:682)
+  at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+  ERROR: org.eclipse.equinox.p2.engine code=0 session context was:(profile=_Users_admin_Work_1C_agentlab_USS_osgi-master_Eclipse.app_Contents_Eclipse, phase=org.eclipse.equinox.internal.p2.engine.phases.CheckTrust, operand=, action=).
+  ERROR: org.eclipse.equinox.p2.engine code=0 Error reading signed content.
+  java.io.IOException: Exception in opening zip file: /Users/admin/.p2/pool/plugins/org.apache.httpcomponents.httpclient_4.3.6.v201511171540.jar
+    at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:321)
+    at org.eclipse.osgi.internal.signedcontent.SignedBundleHook.getSignedContent(SignedBundleHook.java:212)
+    at org.eclipse.equinox.internal.p2.engine.phases.CertificateChecker.checkCertificates(CertificateChecker.java:73)
+    at org.eclipse.equinox.internal.p2.engine.phases.CertificateChecker.start(CertificateChecker.java:54)
+    at org.eclipse.equinox.internal.p2.engine.phases.CheckTrust.completePhase(CheckTrust.java:50)
+    at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:251)
+    at org.eclipse.equinox.internal.p2.engine.Phase.perform(Phase.java:101)
+    at org.eclipse.equinox.internal.p2.engine.PhaseSet.perform(PhaseSet.java:47)
+    at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:75)
+    at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+    at org.eclipse.equinox.internal.provisional.p2.director.PlanExecutionHelper.executePlan(PlanExecutionHelper.java:42)
+    at org.eclipse.oomph.p2.internal.core.ProfileTransactionImpl$3.commit(ProfileTransactionImpl.java:543)
+    at org.eclipse.oomph.p2.internal.core.ProfileTransactionImpl.commit(ProfileTransactionImpl.java:340)
+    at org.eclipse.oomph.setup.p2.impl.P2TaskImpl.perform(P2TaskImpl.java:729)
+    at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.doPerformNeededSetupTasks(SetupTaskPerformer.java:3305)
+    at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.performNeededSetupTasks(SetupTaskPerformer.java:3233)
+    at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.performTriggeredSetupTasks(SetupTaskPerformer.java:3214)
+    at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.perform(SetupTaskPerformer.java:3114)
+    at org.eclipse.oomph.setup.ui.wizards.ProgressPage$9.run(ProgressPage.java:556)
+    at org.eclipse.oomph.setup.ui.wizards.ProgressPage$11$1.run(ProgressPage.java:682)
+    at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+  Caused by: java.io.FileNotFoundException: /Users/admin/.p2/pool/plugins/org.apache.httpcomponents.httpclient_4.3.6.v201511171540.jar (No such file or directory)
+    at java.util.zip.ZipFile.open(Native Method)
+    at java.util.zip.ZipFile.<init>(ZipFile.java:220)
+    at java.util.zip.ZipFile.<init>(ZipFile.java:150)
+    at java.util.zip.ZipFile.<init>(ZipFile.java:164)
+    at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:304)
+    at org.eclipse.osgi.internal.signedcontent.SignedBundleHook.getSignedContent(SignedBundleHook.java:212)
+    at org.eclipse.equinox.internal.p2.engine.phases.CertificateChecker.checkCertificates(CertificateChecker.java:73)
+    at org.eclipse.equinox.internal.p2.engine.phases.CertificateChecker.start(CertificateChecker.java:54)
+    at org.eclipse.equinox.internal.p2.engine.phases.CheckTrust.completePhase(CheckTrust.java:50)
+    at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:251)
+    at org.eclipse.equinox.internal.p2.engine.Phase.perform(Phase.java:101)
+    at org.eclipse.equinox.internal.p2.engine.PhaseSet.perform(PhaseSet.java:47)
+    at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:75)
+    at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+    at org.eclipse.equinox.internal.provisional.p2.director.PlanExecutionHelper.executePlan(PlanExecutionHelper.java:42)
+    at org.eclipse.oomph.p2.internal.core.ProfileTransactionImpl$3.commit(ProfileTransactionImpl.java:543)
+    at org.eclipse.oomph.p2.internal.core.ProfileTransactionImpl.commit(ProfileTransactionImpl.java:340)
+    at org.eclipse.oomph.setup.p2.impl.P2TaskImpl.perform(P2TaskImpl.java:729)
+    at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.doPerformNeededSetupTasks(SetupTaskPerformer.java:3305)
+    at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.performNeededSetupTasks(SetupTaskPerformer.java:3233)
+    at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.performTriggeredSetupTasks(SetupTaskPerformer.java:3214)
+    at org.eclipse.oomph.setup.internal.core.SetupTaskPerformer.perform(SetupTaskPerformer.java:3114)
+    at org.eclipse.oomph.setup.ui.wizards.ProgressPage$9.run(ProgressPage.java:556)
+    at org.eclipse.oomph.setup.ui.wizards.ProgressPage$11$1.run(ProgressPage.java:682)
+    ... 1 more
+
+________________________________________
+
+
+docker run \
+  --name=dockbix-agent-xxl \
+  --net=host \
+  --privileged \
+  -v /:/rootfs \
+  -v /var/run:/var/run \
+  --restart unless-stopped \
+  -e "ZA_Server=192.168.1.65» \
+  -e "ZA_ServerActive=192.168.1.65" \
+  -d monitoringartist/dockbix-agent-xxl-limited:latest
+
+
+
+

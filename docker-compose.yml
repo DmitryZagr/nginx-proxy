@@ -10,29 +10,58 @@ services:
       - ./nginx/log/access.log:/var/log/nginx/access.log
       - ./nginx.tmpl:/app/nginx.tmpl
 
-  tomcat_0:
-    image: tomcat:8.5
-    container_name: tomcat8.5_0
+  nginx_0:
+    image: nginx:latest
+    container_name: nginx_frontend_0
+    ports:
+      - "8001:80"
     environment:
       - VIRTUAL_HOST=192.168.1.65
     volumes:
-     - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
-     - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./frontend/static:/usr/share/nginx/html
+      - ./frontend/default.conf:/etc/nginx/conf.d/default.conf 
+    #  - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    #  - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
 
-  tomcat_1:
-    image: tomcat:8.5
-    container_name: tomcat8.5_1
+  nginx_1:
+    image: nginx:latest
+    container_name: nginx_frontend_1
+    ports:
+      - "8002:80"
     environment:
       - VIRTUAL_HOST=192.168.1.65
     volumes:
-     - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
-     - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./frontend/static:/usr/share/nginx/html
+      - ./frontend/default.conf:/etc/nginx/conf.d/default.conf 
+    # volumes:
+    #  - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    #  - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
 
-  tomcat_2:
-    image: tomcat:8.5
-    container_name: tomcat8.5_2
+  nginx_2:
+    image: nginx:latest
+    container_name: nginx_frontend_2
+    ports:
+      - "8003:80"
     environment:
       - VIRTUAL_HOST=192.168.1.65
     volumes:
-     - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
-     - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./frontend/static:/usr/share/nginx/html
+      - ./frontend/default.conf:/etc/nginx/conf.d/default.conf 
+    # volumes:
+    #  - ./tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    #  - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+
+  # Agent container
+  datadog:
+    build: datadog
+    links:
+     - nginx-proxy # Ensures datadog container can connect to redis container
+     - nginx_0
+     - nginx_1
+     - nginx_2
+    environment:
+     - API_KEY=YOUR_KEY
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /proc/mounts:/host/proc/mounts:ro
+     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
